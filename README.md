@@ -58,6 +58,22 @@ Can book tickets but cannot modify or delete data.
 
 <img width="657" height="98" alt="image" src="https://github.com/user-attachments/assets/7b74e1b4-4c5f-45a4-adda-573311aadfa5" />
 
+ROLE CONTROLLER 
+
+<img width="1489" height="701" alt="image" src="https://github.com/user-attachments/assets/699caa81-2b25-4082-ae06-29e49c73165f" />
+
+🔐 Session Controller
+
+Handles login and logout.
+
+<img width="1477" height="131" alt="image" src="https://github.com/user-attachments/assets/52904f3f-6917-4cb2-a39b-214a391c6fca" />
+
+On successful login:A JWT token is generated and sent back to the frontend. This token must be included in future requests using the Authorization: Bearer <token> header.Since there's no API Gateway in this demo:
+
+The frontend is responsible for extracting the user ID from the token and sending it as X-User-Id in requests.On logout: The token is deleted on the client side (or invalidated if tracked server-side).
+
+
+
 
 
 
