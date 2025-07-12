@@ -1,10 +1,11 @@
 # 🎬 Cinema Web App – Microservice Showcase
 
-Welcome to my **Cinema Web App**, a full-stack **microservices-based system** built with Spring Boot and Docker.  
+Welcome to my **Cinema Web App**,  **microservices-based system** built with Spring Boot.  
 This is a **showcase project** created to demonstrate my knowledge and skills in designing and building microservice architectures.
 
 > ⚠️ **Disclaimer:** This project is meant purely for educational and demonstration purposes.  
-> All API keys, secrets, and environment variables are **intentionally exposed** within the code to simplify the deployment and highlight architectural decisions.  
+> All API keys, secrets, and environment variables are **intentionally exposed** within the code to simplify the deployment and highlight architectural decisions.
+> The project also uses spring.jpa.hibernate.ddl-auto=update to reduce setup complexity and focus on demonstrating key features without requiring manual schema management.
 > ⚠️ **Do not use this project in production as-is.**
 
 ---
@@ -13,11 +14,11 @@ This is a **showcase project** created to demonstrate my knowledge and skills in
 
 The primary aim of this project is to showcase:
 
-- 🔁 **Microservice communication** (RESTful APIs, internal service interaction)
+- 🔁 **Microservice communication** (RESTful APIs, internal service interaction – includes both synchronous and asynchronous communication)
 - 🔐 **JWT-based authentication**
 - 🧩 **Service separation and responsibilities**
 - 🛠️ **Code organization and shared utilities**
-- 🐳 **Docker-based containerization**
+- 🔄 Background jobs with clearly defined responsibilities per service
 
 ---
 
@@ -30,7 +31,7 @@ The application is composed of **4 main microservices** and **1 shared utility m
 - Implements **JWT-based security** for protected endpoints.
 - On successful login, a **JWT token** is generated and returned to the client.
 - All other services are built to rely on this token — **they expect the `userId` to be extracted from it beforehand**.
-- In a real-world system, this extraction would typically be done via an **API Gateway** or **auth middleware**.
+- In a real-world system, this extraction would typically be done via an **API Gateway** or **auth middleware**. !!!
 - 🔒 **In this demo**, no gateway is implemented to keep the architecture flexible and focused on microservice communication.
 - Instead, each secured endpoint directly **expects a valid `userId`** (passed via header or param), simulating post-token-validation behavior.
 
@@ -168,7 +169,6 @@ This ID would then be passed to the Payment Service to ensure consistent and rel
 
 
 
-
 ### 3️⃣ **Payment Service**
 - Handles client payments for booking tickets.
 - Can be extended with integration to external payment gateways.
@@ -189,13 +189,12 @@ currency: A free-to-choose string (e.g., "USD", "EUR").For this demo, currency c
 Payment Flow:
 After sending the checkout request, the service returns a Stripe-generated payment URL where the user completes the payment.
 
-📸 [Add screenshot of the Stripe checkout session URL response here]
-
 Once the payment is completed, Stripe triggers a webhook back to the Payment Service.
 
 The webhook endpoint: /external/v1/webhook/stripe
 
 Validates the payment success. Saves payment details in the payment database. Updates the seat booking status in the Cinema Service accordingly. KEEP IN MIND THIS SERVICE MUST HAVE GOOD FAILED CASE HANDLING BUT I FULLY DEVELOPED SUCCESSEFUL PAYMENT CASE!
+
 
 
 4️⃣ Notification Service
@@ -320,6 +319,6 @@ they are just a supporting part of the project.
 
 ### ⚠️ THIS IS A BASIC SHOWCASE DESIGNED TO DEMONSTRATE INDUSTRY-LEVEL MICROSERVICE PRINCIPLES,  
 CLEAN ARCHITECTURE, AND MAINTAINABLE CODE — NOT A PRODUCTION-READY SOLUTION.
-
+Project also uses SPRING.JPA.HIBERNATE.DDL-AUTO=UPDATE to keep things simple and avoid manual schema setup.
 
 
