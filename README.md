@@ -28,7 +28,33 @@ The application is composed of **4 main microservices** and **1 shared utility m
 ### 1️⃣ **User Management Service**
 - Handles user registration, login, and authentication.
 - Implements **JWT-based security** for protected endpoints.
-- Role-based access control can be added if needed.
+- On successful login, a **JWT token** is generated and returned to the client.
+- All other services are built to rely on this token — **they expect the `userId` to be extracted from it beforehand**.
+- In a real-world system, this extraction would typically be done via an **API Gateway** or **auth middleware**.
+- 🔒 **In this demo**, no gateway is implemented to keep the architecture flexible and focused on microservice communication.
+- Instead, each secured endpoint directly **expects a valid `userId`** (passed via header or param), simulating post-token-validation behavior.
+
+<img width="1534" height="545" alt="image" src="https://github.com/user-attachments/assets/e8bd1418-346e-47bb-8e80-c5971deb5cb5" />
+
+
+Each role is associated with a group that defines its access level:
+
+🛡️ Admin Group (group_id = 1)
+
+Can access all endpoints across all services.
+
+Permissions include create, update, delete, and full management of users, movies, shows, seats, and payments.
+
+👤 User Group (group_id = 2)
+
+Has read-only and booking permissions.
+
+Can view available movies, showtimes, and seat arrangements.
+
+Can book tickets but cannot modify or delete data.
+
+<img width="657" height="98" alt="image" src="https://github.com/user-attachments/assets/7b74e1b4-4c5f-45a4-adda-573311aadfa5" />
+
 
 ### 2️⃣ **Cinema Service**
 - Manages cinema halls, movies, showtimes, and seat arrangements.
@@ -45,3 +71,5 @@ The application is composed of **4 main microservices** and **1 shared utility m
 ### 🧰 **Utils Module**
 - A shared Java module that contains common DTOs, enums, and utility classes.
 - Used across all services to ensure consistency and avoid duplication.
+
+
