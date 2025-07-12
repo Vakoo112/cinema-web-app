@@ -279,7 +279,11 @@ It: Creates a notification entry for the user with ID 11. Uses a unique template
 
 
 
+HOW TO RUN PROJECT 
 
+IN UM CASE THERE IS docker file and .env files  first generate jar file  1)mvn clean package -DskipTests  2) (file location) docker build -t ticket-um . that builds image then we must run that docker run -d -p 9090:9090 --name ticket-um --env-file .env ticket-um
+
+in cinmea service again there is docker file  again mvn clean package -DskipTests  
 
 
 
