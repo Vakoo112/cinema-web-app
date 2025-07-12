@@ -266,7 +266,8 @@ The Cinema Service: Updates the corresponding seat booking to PAID. Assigns the 
 
 <img width="1313" height="48" alt="image" src="https://github.com/user-attachments/assets/75281fbf-404a-45f8-b5bf-77bedf2cc637" />
 
-and payment id : <img width="1519" height="12" alt="image" src="https://github.com/user-attachments/assets/d343ae2d-a7fd-439e-bbe4-4c4cfbd883e0" />
+and payment id : <img width="1492" height="109" alt="image" src="https://github.com/user-attachments/assets/a90bc4b0-78d0-4faf-9f1f-4ffa873fa0df" />
+
 
 📬 Step 4: Notification Delivery
 The Notification Service receives the Kafka message.
