@@ -38,6 +38,9 @@ The application is composed of **4 main microservices** and **1 shared utility m
 
 
 Each role is associated with a group that defines its access level:
+Permissions are enforced at the endpoint level, ensuring that users can only access resources their permits.
+<img width="815" height="292" alt="image" src="https://github.com/user-attachments/assets/d5f7c475-1f1e-45c7-8664-4c4f41110b07" />
+
 
 🛡️ Admin Group (group_id = 1)
 
@@ -54,6 +57,8 @@ Can view available movies, showtimes, and seat arrangements.
 Can book tickets but cannot modify or delete data.
 
 <img width="657" height="98" alt="image" src="https://github.com/user-attachments/assets/7b74e1b4-4c5f-45a4-adda-573311aadfa5" />
+
+
 
 
 ### 2️⃣ **Cinema Service**
