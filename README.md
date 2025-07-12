@@ -221,4 +221,67 @@ Exposes simple endpoints for managing or viewing notifications (for demo/testing
 - See all in source code.
 
 
+🚀 Final Demo – End-to-End Ticket Booking Flow
+This section demonstrates a full cycle: selecting seats → making payment → receiving notification.
+
+
+🪑 Step 1: Pending Seat Booking
+Endpoint: POST localhost:8080/external/v1/seat-booking/pending  X-User-Id: 11
+
+{
+  "seatIds": [21, 22, 23],
+  "movieShowId": 1
+}
+
+This triggers the Cinema Service, which: Validates the seats and show. Creates a pending booking in the database. Returns a seatBookingId (e.g., 1452).
+
+<img width="1304" height="42" alt="image" src="https://github.com/user-attachments/assets/02b26850-31d7-4461-83c9-a094472328b8" />
+As you can see it on pending status and does not have unique code and does not have payment id 
+
+💳 Step 2: Create Payment Session
+
+POST localhost:4242/external/v1/payments/checkout-session X-User-Id: 11
+
+{
+  "seatBookingId": 1453,
+  "amount": 345,
+  "currency": "USD"
+}
+
+Creates a Stripe checkout session. Returns a payment URL. As i said before we use seatBookingId which we temproaly triggered amount must be id but its test case and curreny also
+
+<img width="1297" height="96" alt="image" src="https://github.com/user-attachments/assets/6ee73628-8269-436a-b4bd-7c0bf3490c25" />
+
+Then comes stripe payment :
+
+<img width="465" height="714" alt="image" src="https://github.com/user-attachments/assets/1466eec4-284e-44b8-844f-f293ef9b58c1" />
+
+use Test Card : 4242 4242 4242 4242
+
+🔄 Step 3: Post-Payment Automation
+Stripe triggers a webhook automatically to the Payment Service.
+
+The Payment Service: Marks the payment as successful in its DB. Sends a Kafka message to the Cinema Service.
+
+The Cinema Service: Updates the corresponding seat booking to PAID. Assigns the paymentId to the booking.
+
+<img width="1313" height="48" alt="image" src="https://github.com/user-attachments/assets/75281fbf-404a-45f8-b5bf-77bedf2cc637" />
+
+and payment id : <img width="1519" height="12" alt="image" src="https://github.com/user-attachments/assets/d343ae2d-a7fd-439e-bbe4-4c4cfbd883e0" />
+
+📬 Step 4: Notification Delivery
+The Notification Service receives the Kafka message.
+
+It: Creates a notification entry for the user with ID 11. Uses a unique template code for consistency. (Simulated) sends a confirmation message.
+
+<img width="1355" height="19" alt="image" src="https://github.com/user-attachments/assets/2ef157b5-3be5-4148-b604-e5ff51f1c748" />
+
+
+
+
+
+
+
+
+
 
