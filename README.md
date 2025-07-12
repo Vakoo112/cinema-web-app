@@ -277,15 +277,52 @@ It: Creates a notification entry for the user with ID 11. Uses a unique template
 <img width="1355" height="19" alt="image" src="https://github.com/user-attachments/assets/2ef157b5-3be5-4148-b604-e5ff51f1c748" />
 
 
+1️⃣ Universal steps for every service (e.g., User Management (UM), Cinema Service, Payment Service, Notification Service)
+Each service has:
+
+A Dockerfile .env file for configuration Maven project to build the JAR
+
+From the root folder of each service, run: mvn clean package -DskipTests This will generate the .jar file in the target/ directory. From the same service directory where the Dockerfile and target/ folder are, run: docker build -t <service-name> . 
+
+Replace <service-name> with your desired image name, for example: ticket-um, cinema-service, payment-service, notification-service
+
+Run the container exposing the service port and load environment variables from the .env file: docker run -d -p <host-port>:<container-port> --name <container-name> --env-file .env <service-name>
+
+Example for User Management: docker run -d -p 9090:9090 --name ticket-um --env-file .env ticket-um
+
+In the root folder of your project, you already have a docker-compose.yml for Kafka and your Oracle DB. To start Kafka and DB containers, run: docker-compose up -d
+
+3️⃣ Summary of ports
+Service	Port (Container)	Port (Host)	Image Name
+User Management	9090	9090	ticket-um
+Cinema Service	8080	8080	cinema-service
+Payment Service	4242	4242	payment-service
+Notification Service	4040	4040	notification-service
 
 
-HOW TO RUN PROJECT 
+<div style="color: red; font-size: 24px; font-weight: bold;">
 
-IN UM CASE THERE IS docker file and .env files  first generate jar file  1)mvn clean package -DskipTests  2) (file location) docker build -t ticket-um . that builds image then we must run that docker run -d -p 9090:9090 --name ticket-um --env-file .env ticket-um
+🚨 IMPORTANT NOTE 🚨  
+THIS MICROSERVICE PROJECT IS A FULLY FUNCTIONAL SHOWCASE DEMONSTRATION!
 
-in cinmea service again there is docker file  again mvn clean package -DskipTests  
+</div>
 
+<div style="font-size: 18px; font-weight: bold; margin-top: 10px;">
 
+THE MAIN FOCUS HERE IS THE <span style="color: red;">CODE QUALITY AND BUSINESS LOGIC</span> — HOW THE MICROSERVICES ARE FULLY DEVELOPED, CLEANLY STRUCTURED, AND COMMUNICATE VIA KAFKA AND REST.
 
+</div>
+
+<div style="font-size: 16px; margin-top: 10px;">
+
+DOCKER IMAGES AND <code>.ENV</code> FILES ARE PROVIDED TO SIMPLIFY DEPLOYMENT AND TESTING, BUT THEY ARE JUST A SUPPORTING PART OF THE PROJECT.
+
+</div>
+
+<div style="font-size: 18px; font-weight: bold; color: red; margin-top: 10px;">
+
+THIS IS A BASIC SHOWCASE DESIGNED TO DEMONSTRATE INDUSTRY-LEVEL MICROSERVICE PRINCIPLES, CLEAN ARCHITECTURE, AND MAINTAINABLE CODE — NOT A PRODUCTION-READY SOLUTION.
+
+</div>
 
 
