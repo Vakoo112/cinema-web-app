@@ -40,8 +40,7 @@ The application is composed of **4 main microservices** and **1 shared utility m
 
 Each role is associated with a group that defines its access level:
 Permissions are enforced at the endpoint level, ensuring that users can only access resources their permits.
-<img width="643" height="289" alt="image" src="https://github.com/user-attachments/assets/f99de07a-d21f-404f-8395-66728d243036" />
-
+<img width="805" height="282" alt="image" src="https://github.com/user-attachments/assets/6ecef411-2504-4357-805f-fa60d49b23f1" />
 
 
 🛡️ Admin Group (group_id = 1)
