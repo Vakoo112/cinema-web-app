@@ -262,7 +262,7 @@ Stripe triggers a webhook automatically to the Payment Service.
 
 The Payment Service: Marks the payment as successful in its DB. Sends a Kafka message to the Cinema Service.
 
-The Cinema Service: Updates the corresponding seat booking to PAID. Assigns the paymentId to the booking.
+The Cinema Service: Updates the corresponding seat booking to BOOKED. Assigns the paymentId to the booking.
 
 <img width="1313" height="48" alt="image" src="https://github.com/user-attachments/assets/75281fbf-404a-45f8-b5bf-77bedf2cc637" />
 
