@@ -10,6 +10,5 @@ import java.util.List;
 
 public interface SeatBookingRepo extends JpaRepository<SeatBooking, Long>, JpaSpecificationExecutor<SeatBooking> {
 
-  List<SeatBooking> findAllByStatusAndCreatedDateAfterAndExpiresAtBefore(
-      BookingStatus status, LocalDateTime createdAfter, LocalDateTime expiresBefore);
+  List<SeatBooking> findAllByStatusAndCreatedDateAfterAndExpiresAtBefore(BookingStatus status, LocalDateTime createdAfter, LocalDateTime expiresBefore);
 }
