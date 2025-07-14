@@ -31,7 +31,6 @@ public class SeatService {
   private final SeatMapper seatMapper;
   private final MovieShowService movieShowService;
 
-
   @Transactional
   public SeatResp add(long hallId, SeatReq req) {
     var hall = hallService.findById(hallId);
