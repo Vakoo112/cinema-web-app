@@ -26,18 +26,15 @@ public class PaymentService {
 
   private final PaymentRepo paymentRepo;
   private final ObjectMapper objectMapper;
-
   @Value("${stripe.webhook.secret}")
   private String stripeWebhookSecret;
-
   @Value("${stripe.secret.key}")
   private String stripeApiKey;
-
   private final KafkaMessageProduce kafkaMessageProduce;
 
   public Session createCheckoutSession(CreatePaymentReq req) throws StripeException {
     Stripe.apiKey = stripeApiKey;
-
+    
     // save payment in DB first
     var payment = new Payment();
     payment.setSeatBookingId(req.getSeatBookingId());
@@ -72,8 +69,7 @@ public class PaymentService {
   public void handleStripeWebhookAsynch(String payload, String sigHeader) throws Exception {
     // Validate and parse event
     Event event = Webhook.constructEvent(payload, sigHeader, stripeWebhookSecret);
-
-    String eventType = event.getType();
+    var eventType = event.getType();
 
     if ("checkout.session.completed".equals(eventType)) {
       // parse raw JSON to reliably get paymentIntent and metadata.paymentId
