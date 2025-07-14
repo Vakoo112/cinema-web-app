@@ -18,7 +18,6 @@ public class NotifSpec implements Specification<Notification> {
 
   private final NotificationSearch searchQuery;
 
-
   @Override
   public Predicate toPredicate(Root<Notification> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
     var predicates = new ArrayList<Predicate>();
