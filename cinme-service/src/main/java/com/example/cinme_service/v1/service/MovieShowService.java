@@ -32,11 +32,10 @@ public class MovieShowService {
     var movieShow = movieShowMapper.toMovieShow(req);
     var movie = movieService.findById(req.getMovieId());
 
-    LocalDateTime startTime = movieShow.getStartTime();
+    var startTime = movieShow.getStartTime();
     var duration = movie.getDurationInMinutes();
-
+    
     movieShow.setEndTime(startTime.plusMinutes(duration));
-
     movieShowRepo.saveAndFlush(movieShow);
     return movieShowMapper.toMovieShowResp(movieShow);
   }
@@ -72,6 +71,7 @@ public class MovieShowService {
     for (MovieShow show : endedShows) {
       show.setActive(false);
     }
+    
     movieShowRepo.flush();
   }
 
