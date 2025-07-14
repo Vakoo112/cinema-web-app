@@ -39,7 +39,6 @@ public class MovieShowController {
   }
 
   @PreAuthorize("hasAuthority('ADD_MOVIE_SHOW')")
-
   @PutMapping("{id}")
   public Resp<MovieShowResp> edit(@PathVariable long id, @RequestBody @Valid Req<EditMovieShowReq> req) {
     var resp = movieShowService.edit(id, req.getData());
