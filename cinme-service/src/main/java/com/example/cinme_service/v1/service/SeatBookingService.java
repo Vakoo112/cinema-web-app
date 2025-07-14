@@ -40,8 +40,9 @@ public class SeatBookingService {
 
   @Transactional
   public SeatBookResp createPendingBooking(List<Long> seatIds, Long movieShowId, Long userId) {
-    if (seatIds.size() > 4)
+    if (seatIds.size() > 4) {
       throw new ForbiddenException(MAX_SEAT_RESTRICTION);
+    }
 
     var movieShow = movieShowService.getActiveMovieShowById(movieShowId);
     var hallId = movieShow.getHall().getId();
@@ -114,7 +115,6 @@ public class SeatBookingService {
     return seatBookingMapper.toSeatBookResp(seatBooking);
   }
 
-
   @Transactional
   public void updatePaymentStatusDetails(PaymentData req) {
     var seatBooking = findById(req.getSeatBookingId());
@@ -137,7 +137,7 @@ public class SeatBookingService {
 
   public static String generateMVCode() {
     // Get a random UUID and take the first 8 characters for brevity
-    String randomPart = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8).toUpperCase();
+    var randomPart = UUID.randomUUID().toString().replaceAll("-", "").substring(0, 8).toUpperCase();
     return "MV" + randomPart;
   }
 
@@ -157,7 +157,6 @@ public class SeatBookingService {
     var seatBooking = findById(id);
     return seatBookingMapper.toSeatBookResp(seatBooking);
   }
-
 
   public SeatBooking findById(long id) {
     return seatBookingRepo.findById(id)
