@@ -4,6 +4,7 @@ import com.example.cinme_service.v1.domain.SeatReservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
+
 public interface SeatReservationRepo extends JpaRepository<SeatReservation, Long> {
 
   @Query("""
