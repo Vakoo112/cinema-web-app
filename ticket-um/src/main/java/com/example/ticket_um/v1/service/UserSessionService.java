@@ -44,19 +44,19 @@ public class UserSessionService {
     } catch (BadCredentialsException ex) {
       int attempts = userService.authFailAttempt(username);
       if (attempts == 5) {
-        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 10 წუთით!");
+        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 10 MINUTE!");
       }
       if (attempts == 10) {
-        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 1 საათით!");
+        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 1 HOUR!");
       }
       throw ex;
     } catch (LockedException ex) {
       var user = userService.getByUsername(username);
       if (user.getAuthFailAttempts() == 5) {
-        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 10 წუთით!");
+        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 10 MINUTE!");
       }
       if (user.getAuthFailAttempts() == 10) {
-        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 1 საათით!");
+        throw new UnauthorizedException(USER_LOCKED, USER_LOCKED.getMessage() + " 1 HOUR!");
       }
       throw ex;
     }
