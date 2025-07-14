@@ -85,7 +85,6 @@ public class MovieService {
           var resp = getMovieByImdbId(imdbId);
           if (resp != null && resp.getImdbRating() != null) {
             movie.setImdbRating(resp.getImdbRating());
-            // flush maybe ?
           }
         } catch (Exception e) {
           // log slf4
