@@ -17,7 +17,6 @@ public class Payment extends Extendable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
   private Long seatBookingId;
   private Integer amount;
   private String currency;
